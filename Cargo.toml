@@ -1,0 +1,27 @@
+[package]
+name = "socks-gateway"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "io-util", "time", "signal", "sync"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+clap = { version = "4", features = ["derive"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+anyhow = "1"
+thiserror = "2"
+socket2 = { version = "0.5", features = ["all"] }
+arc-swap = "1"
+dashmap = "6"
+fastrand = "2"
+rlimit = "0.10"
+percent-encoding = "2"
+mimalloc = { version = "0.1", default-features = false }
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+opt-level = 3
+strip = true
